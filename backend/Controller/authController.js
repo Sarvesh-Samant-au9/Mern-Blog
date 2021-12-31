@@ -1,9 +1,10 @@
 const User = require("../Model/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-// Register Function
 const asyncMiddleware = require("../Middleware/asyncError");
 const ErrorHandler = require("../utils/error");
+
+// Register Function
 exports.register = asyncMiddleware(async (req, res, next) => {
   const { userName, email, password } = req.body;
   if (!email || !password) {
@@ -36,11 +37,13 @@ exports.register = asyncMiddleware(async (req, res, next) => {
   });
 
   res.status(201).json({
-    status: "success",
+    success: true,
     data: { token },
+    message: "User Registered",
   });
 });
 
+// Login Function
 exports.login = asyncMiddleware(async (req, res, next) => {
   const { email, password } = req.body;
   if (!email || !password) {
@@ -65,16 +68,19 @@ exports.login = asyncMiddleware(async (req, res, next) => {
     expiresIn: 3600,
   });
   res.status(200).json({
-    status: "success",
+    success: true,
     data: { token },
+    message: "User Logged In",
   });
 });
 
+// User Details
 exports.sendUser = asyncMiddleware(async (req, res, next) => {
   if (req.user) {
     res.status(200).json({
-      status: "success",
+      success: true,
       data: { user: req.user },
+      message: "User Details Fetched",
     });
   }
 });

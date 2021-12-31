@@ -10,14 +10,25 @@ const blogSchema = new mongoose.Schema({
     required: [true, "Content Must be Present"],
     trim: true,
   },
-  picture: {
+  image: {
     type: String,
     required: [true, "Image is Necessary"],
   },
   category: {
+    type: String,
+    required: [true, "Choose any of 1 category"],
+  },
+  tags: {
     type: Array,
   },
-  createdDate: { type: Date },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  views: {
+    type: Number,
+    default: 0,
+  },
   author: {
     type: mongoose.Schema.ObjectId,
     required: true,
