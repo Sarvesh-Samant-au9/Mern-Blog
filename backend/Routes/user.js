@@ -7,6 +7,7 @@ const {
 } = require("../Controller/userController");
 const { isAuthenticated, isOwner } = require("../Middleware/auth");
 router.get("/", isAuthenticated, getAllUsers);
+
 router.get("/:userId", getParticularUser);
 
 router.put("/:userId", isAuthenticated, isOwner, updateUser);

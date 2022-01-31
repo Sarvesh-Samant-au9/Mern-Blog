@@ -17,7 +17,7 @@ exports.register = asyncMiddleware(async (req, res, next) => {
   }
   let user = await User.findOne({ email });
   if (user) {
-    return next(new ErrorHandler("Duplicate User Entry", 409));
+    return next(new ErrorHandler("User Already Registered", 409));
   }
   const hashed = await bcrypt.hash(password, 10);
   user = await User.create({
